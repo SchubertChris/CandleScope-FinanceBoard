@@ -1,18 +1,17 @@
 /* ══════════════════════════════════════
    DOCS — Über diese App
-   Windows-Kachel-Raster + Apple-Eleganz
 ══════════════════════════════════════ */
 
 .docs-wrap {
-  max-width: 1440px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 0 60px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
 }
 
-/* ── HERO ── */
+/* HERO */
 .docs-hero {
   position: relative;
   background: linear-gradient(135deg, #0a0f1e 0%, #0d1628 50%, #080d1a 100%);
@@ -24,11 +23,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 32px;
-  min-height: 200px;
+  min-height: 190px;
 }
 .docs-hero-bg {
   position: absolute;
   inset: 0;
+  pointer-events: none;
   background:
     radial-gradient(
       ellipse at 10% 50%,
@@ -40,20 +40,6 @@
       rgba(123, 95, 255, 0.08) 0%,
       transparent 50%
     );
-  pointer-events: none;
-}
-.docs-hero-glow {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  top: -100px;
-  right: 200px;
-  background: radial-gradient(
-    circle,
-    rgba(77, 158, 255, 0.06) 0%,
-    transparent 70%
-  );
-  pointer-events: none;
 }
 .docs-hero-content {
   position: relative;
@@ -74,22 +60,21 @@
   margin-bottom: 14px;
 }
 .docs-hero-title {
-  font-family: var(--sans);
-  font-size: 2.2em;
+  font-size: 2em;
   font-weight: 800;
   color: var(--text);
   line-height: 1.1;
   letter-spacing: -0.5px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .docs-hero-title span {
   color: var(--blue);
 }
 .docs-hero-sub {
-  font-size: 0.82em;
+  font-size: 0.8em;
   color: var(--text3);
   line-height: 1.7;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 .docs-hero-tags {
   display: flex;
@@ -97,34 +82,31 @@
   flex-wrap: wrap;
 }
 .docs-tag {
-  font-size: 0.7em;
+  font-size: 0.68em;
   font-weight: 600;
-  padding: 4px 12px;
+  padding: 4px 10px;
   border-radius: 20px;
   border: 1px solid var(--border2);
   color: var(--text2);
   background: rgba(255, 255, 255, 0.03);
-  letter-spacing: 0.3px;
 }
-
-/* Hero Visual */
 .docs-hero-visual {
   position: relative;
   z-index: 1;
   flex-shrink: 0;
 }
 .docs-hero-card {
-  width: 160px;
+  width: 150px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border2);
   border-radius: 14px;
-  padding: 18px 16px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 .docs-hc-bar {
-  height: 8px;
+  height: 7px;
   border-radius: 4px;
   opacity: 0.7;
   animation: docs-bar-grow 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
@@ -148,20 +130,22 @@
 }
 .docs-hc-label {
   font-family: var(--mono);
-  font-size: 0.6em;
+  font-size: 0.58em;
   color: var(--text3);
-  margin-top: 4px;
   text-align: center;
+  margin-top: 4px;
 }
 
-/* ── KACHEL-GRID ── */
+/* GRIDS */
 .docs-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  gap: 14px;
+}
+.docs-grid-3 {
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
-/* Basis-Kachel */
+/* BASE TILE */
 .docs-tile {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -177,11 +161,16 @@
   border-color: var(--border2);
   transform: translateY(-1px);
 }
+.docs-tile--span2 {
+  grid-column: span 2;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
 .docs-tile-icon {
   font-size: 1.8em;
   margin-bottom: 10px;
   display: block;
-  filter: drop-shadow(0 0 12px rgba(77, 158, 255, 0.2));
 }
 .docs-tile-tag {
   font-family: var(--mono);
@@ -193,7 +182,6 @@
   margin-bottom: 5px;
 }
 .docs-tile-title {
-  font-family: var(--sans);
   font-size: 0.95em;
   font-weight: 700;
   color: var(--text);
@@ -209,21 +197,12 @@
   color: var(--text2);
 }
 
-/* Breite Kachel */
-.docs-tile--wide {
-  grid-column: span 2;
-}
-/* Hohe Kachel */
-.docs-tile--tall {
-  grid-row: span 2;
-}
-
-/* Akzent-Kachel */
+/* Accent tile */
 .docs-tile--accent {
   background: linear-gradient(
     135deg,
-    rgba(77, 158, 255, 0.08) 0%,
-    rgba(123, 95, 255, 0.05) 100%
+    rgba(77, 158, 255, 0.07) 0%,
+    rgba(123, 95, 255, 0.04) 100%
   );
   border-color: rgba(77, 158, 255, 0.2);
 }
@@ -237,56 +216,10 @@
   background: linear-gradient(90deg, var(--blue), var(--blue2));
   border-radius: 16px 16px 0 0;
 }
-.docs-tile--accent .docs-tile-content {
-  flex: 1;
-}
-.docs-tile--accent {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
 
-/* Dark Kachel */
+/* Dark tile */
 .docs-tile--dark {
   background: rgba(0, 0, 0, 0.3);
-  border-color: var(--border);
-}
-
-/* Glass Kachel */
-.docs-tile--glass {
-  background: rgba(255, 255, 255, 0.025);
-  border-color: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(10px);
-}
-
-/* Claude Kachel */
-.docs-tile--claude {
-  background: linear-gradient(135deg, #0d1020 0%, #111828 100%);
-  border-color: rgba(123, 95, 255, 0.25);
-}
-.docs-tile--claude::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 80px;
-  height: 80px;
-  background: radial-gradient(
-    circle,
-    rgba(123, 95, 255, 0.15) 0%,
-    transparent 70%
-  );
-}
-.docs-claude-badge {
-  display: inline-flex;
-  margin-top: 12px;
-  font-family: var(--mono);
-  font-size: 0.6em;
-  color: #a78bfa;
-  background: rgba(123, 95, 255, 0.1);
-  border: 1px solid rgba(123, 95, 255, 0.25);
-  padding: 3px 8px;
-  border-radius: 6px;
 }
 
 /* Chips */
@@ -306,39 +239,19 @@
   border-radius: 4px;
 }
 
-/* Version Liste */
-.docs-version-list {
-  margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.docs-vitem {
-  font-size: 0.72em;
-  padding: 5px 10px;
+/* Claude badge */
+.docs-claude-badge {
+  display: inline-flex;
+  font-family: var(--mono);
+  font-size: 0.62em;
+  color: #a78bfa;
+  background: rgba(123, 95, 255, 0.1);
+  border: 1px solid rgba(123, 95, 255, 0.25);
+  padding: 4px 10px;
   border-radius: 6px;
-  border: 1px solid transparent;
-  color: var(--text3);
-}
-.docs-vitem--done {
-  background: rgba(0, 229, 160, 0.06);
-  border-color: rgba(0, 229, 160, 0.12);
-  color: var(--green);
-}
-.docs-vitem--done::before {
-  content: "✓ ";
-  opacity: 0.7;
-}
-.docs-vitem--next {
-  background: rgba(77, 158, 255, 0.06);
-  border-color: rgba(77, 158, 255, 0.15);
-  color: var(--blue);
-}
-.docs-vitem--next::before {
-  content: "→ ";
 }
 
-/* Features Grid */
+/* FEATURES */
 .docs-tile--features {
   padding: 22px 22px 24px;
 }
@@ -373,61 +286,45 @@
   line-height: 1.2;
 }
 .docs-feature-desc {
-  font-size: 0.6em;
+  font-size: 0.58em;
   color: var(--text3);
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
-.docs-roadmap-list {
+/* STATS */
+.docs-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
   margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
 }
-.docs-roadmap-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.75em;
-  color: var(--text2);
+.docs-stat {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 12px;
+  text-align: center;
 }
-.docs-roadmap-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.docs-roadmap-dot--planned {
-  background: var(--blue);
-  box-shadow: 0 0 6px var(--blue);
-}
-.docs-roadmap-dot--idea {
-  background: var(--text3);
-}
-.docs-roadmap-badge {
-  margin-left: auto;
+.docs-stat-num {
   font-family: var(--mono);
-  font-size: 0.75em;
-  padding: 1px 7px;
-  border-radius: 4px;
-  border: 1px solid transparent;
-}
-.docs-roadmap-badge--planned {
+  font-size: 1.6em;
+  font-weight: 700;
   color: var(--blue);
-  background: rgba(77, 158, 255, 0.08);
-  border-color: rgba(77, 158, 255, 0.2);
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 5px;
 }
-.docs-roadmap-badge--idea {
+.docs-stat-lbl {
+  font-size: 0.62em;
   color: var(--text3);
-  background: rgba(255, 255, 255, 0.04);
-  border-color: var(--border);
 }
 
+/* STACK */
 .docs-stack-list {
-  margin-top: 12px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 .docs-stack-item {
   display: flex;
@@ -449,47 +346,137 @@
   font-size: 0.9em;
 }
 
-/* Philosophie */
+/* PHILOSOPHY */
 .docs-tile--philosophy {
   background: linear-gradient(160deg, #0a0e18 0%, #0c1220 100%);
+}
+
+/* ── ROADMAP SCHLANGENWEG ── */
+.docs-tile--roadmap-full {
+  padding: 28px 28px 32px;
+}
+
+.docs-roadmap-snake {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+  padding: 16px 0;
+}
+.docs-roadmap-snake::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 12.5%;
+  right: 12.5%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--border2) 0px,
+    var(--border2) 8px,
+    transparent 8px,
+    transparent 14px
+  );
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.docs-snake-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 8px;
+  position: relative;
+  gap: 10px;
+}
+.docs-snake-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 1;
+}
+.docs-snake-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border2);
+  background: var(--panel);
+  transition: transform 0.2s;
+}
+.docs-snake-dot--done {
+  background: var(--green);
+  border-color: var(--green);
+  box-shadow: 0 0 10px rgba(0, 229, 160, 0.35);
+}
+.docs-snake-dot--current {
+  background: var(--blue);
+  border-color: var(--blue);
+  box-shadow: 0 0 14px rgba(77, 158, 255, 0.5);
+  animation: pulse-dot 2s infinite;
+}
+.docs-snake-dot--planned {
+  background: var(--panel2);
+  border-color: var(--blue);
+}
+.docs-snake-dot--idea {
+  background: var(--panel2);
   border-color: var(--border2);
 }
 
-.docs-stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 10px;
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 14px rgba(77, 158, 255, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(77, 158, 255, 0.8);
+  }
 }
-.docs-stat {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px 12px;
+
+.docs-snake-version {
+  font-family: var(--mono);
+  font-size: 0.6em;
+  font-weight: 700;
+  color: var(--text3);
+  letter-spacing: 0.5px;
+}
+.docs-snake-content {
   text-align: center;
 }
-.docs-stat-num {
-  font-family: var(--mono);
-  font-size: 1.6em;
+.docs-snake-label {
+  font-size: 0.72em;
   font-weight: 700;
-  color: var(--blue);
-  letter-spacing: -1px;
-  line-height: 1;
-  margin-bottom: 5px;
+  color: var(--text2);
+  line-height: 1.25;
+  margin-bottom: 3px;
 }
-.docs-stat-lbl {
-  font-size: 0.65em;
+.docs-snake-desc {
+  font-size: 0.62em;
+  color: var(--text3);
+  line-height: 1.4;
+}
+
+.docs-snake-item--done .docs-snake-label {
+  color: var(--green);
+}
+.docs-snake-item--current .docs-snake-label {
+  color: var(--blue);
+}
+.docs-snake-item--planned .docs-snake-label {
+  color: var(--text2);
+}
+.docs-snake-item--idea .docs-snake-label {
   color: var(--text3);
 }
 
-/* Footer */
+/* FOOTER */
 .docs-footer {
   text-align: center;
   padding: 28px 0 8px;
   border-top: 1px solid var(--border);
 }
 .docs-footer-logo {
-  font-family: var(--sans);
   font-size: 0.85em;
   font-weight: 700;
   color: var(--text2);
@@ -502,26 +489,18 @@
   margin-top: 5px;
 }
 
-/* Crimson Theme Anpassungen */
+/* Crimson */
 [data-theme="crimson"] .docs-hero {
   background: linear-gradient(135deg, #120508 0%, #1a0709 50%, #0e0406 100%);
 }
 [data-theme="crimson"] .docs-tile--accent {
   background: linear-gradient(
     135deg,
-    rgba(224, 80, 96, 0.08) 0%,
-    rgba(160, 40, 64, 0.05) 100%
+    rgba(224, 80, 96, 0.07) 0%,
+    rgba(160, 40, 64, 0.04) 100%
   );
-  border-color: rgba(224, 80, 96, 0.2);
+  border-color: rgba(224, 80, 96, 0.18);
 }
 [data-theme="crimson"] .docs-tile--accent::before {
   background: linear-gradient(90deg, var(--blue), var(--blue2));
-}
-[data-theme="crimson"] .docs-tile--claude {
-  border-color: rgba(160, 40, 64, 0.25);
-}
-[data-theme="crimson"] .docs-claude-badge {
-  color: #f87171;
-  background: rgba(160, 40, 64, 0.1);
-  border-color: rgba(160, 40, 64, 0.25);
 }

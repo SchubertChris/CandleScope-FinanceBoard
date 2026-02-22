@@ -9,14 +9,13 @@ function renderDocs() {
   el.innerHTML = `
   <div class="docs-wrap">
 
-    <!-- HERO ──────────────────────────── -->
+    <!-- HERO -->
     <div class="docs-hero">
       <div class="docs-hero-bg"></div>
-      <div class="docs-hero-glow"></div>
       <div class="docs-hero-content">
         <div class="docs-hero-badge">v3.0 · Februar 2026</div>
         <h1 class="docs-hero-title">Candlescope<br><span>FinanceBoard</span></h1>
-        <p class="docs-hero-sub">Deine Finanzen. Offline. Sicher. Kompakt.<br>Entwickelt mit Präzision — powered by Claude AI.</p>
+        <p class="docs-hero-sub">Deine Finanzen. Offline. Sicher. Kompakt.<br>Entwickelt mit Claude AI von Anthropic.</p>
         <div class="docs-hero-tags">
           <span class="docs-tag">🔒 100% Lokal</span>
           <span class="docs-tag">⚡ Offline First</span>
@@ -34,188 +33,131 @@ function renderDocs() {
       </div>
     </div>
 
-    <!-- KACHEL-GRID ────────────────────── -->
-    <div class="docs-grid">
-
-      <!-- Große Kachel: Warum offline? -->
-      <div class="docs-tile docs-tile--wide docs-tile--accent">
+    <!-- ZEILE 1: Warum offline (breit) + Version + Hersteller -->
+    <div class="docs-grid docs-grid-3">
+      <div class="docs-tile docs-tile--accent docs-tile--span2">
         <div class="docs-tile-icon">🔒</div>
-        <div class="docs-tile-content">
-          <div class="docs-tile-tag">Sicherheit</div>
+        <div>
+          <div class="docs-tile-tag">Sicherheit & Philosophie</div>
           <div class="docs-tile-title">Warum 100% offline?</div>
           <div class="docs-tile-body">
             Deine Kontonummern, Sparziele und Monatseinkommen gehören nur dir.
-            FinanceBoard sendet <strong>keine einzige Zahl</strong> an Server.
-            Keine Cloud, keine Accounts, keine Datenschutzerklärungen.
-            Alles liegt verschlüsselt in deinem Browser — und bleibt dort.
+            FinanceBoard sendet <strong>keine einzige Zahl</strong> an Server — keine Cloud,
+            keine Accounts, kein Tracking. Alle Daten liegen lokal in deinem Browser,
+            geschützt durch SHA-256 Passworthash und vollständig unter deiner Kontrolle.
+            <br><br>
+            <strong>Kein Abo. Kein Login. Keine Datenschutzerklärungen.</strong>
           </div>
           <div class="docs-tile-chips">
             <span class="docs-chip">localStorage</span>
-            <span class="docs-chip">SHA-256 Passwort</span>
+            <span class="docs-chip">SHA-256</span>
             <span class="docs-chip">Kein Backend</span>
+            <span class="docs-chip">Privacy Mode</span>
+            <span class="docs-chip">Auto-Lock</span>
           </div>
         </div>
       </div>
-
-      <!-- Kachel: Version -->
       <div class="docs-tile docs-tile--dark">
-        <div class="docs-tile-icon">🚀</div>
-        <div class="docs-tile-tag">Version</div>
-        <div class="docs-tile-title">v3.0</div>
-        <div class="docs-version-list">
-          <div class="docs-vitem docs-vitem--done">v1 · Dashboard & Konten</div>
-          <div class="docs-vitem docs-vitem--done">v2 · Tutorial & IBAN</div>
-          <div class="docs-vitem docs-vitem--done">v3 · Ziele · Charts · Themes</div>
-          <div class="docs-vitem docs-vitem--next">v4 · Bankimport · CSV</div>
-        </div>
-      </div>
-
-      <!-- Kachel: Hersteller -->
-      <div class="docs-tile docs-tile--glass">
         <div class="docs-tile-icon">👨‍💻</div>
         <div class="docs-tile-tag">Hersteller</div>
         <div class="docs-tile-title">Made by<br>Candlescope</div>
         <div class="docs-tile-body" style="margin-top:10px;">
-          Entwickelt als persönliches Finanz-Dashboard. Kein Unternehmen, kein VC.
-          Ein Projekt — entworfen für den täglichen Gebrauch.
+          Persönliches Finanz-Dashboard, entwickelt für den täglichen Gebrauch.
+          Kein Unternehmen, kein VC — ein Projekt mit Sinn.
+        </div>
+        <div class="docs-claude-badge" style="margin-top:14px;">
+          🤖 Powered by Claude AI
         </div>
       </div>
+    </div>
 
-      <!-- Kachel: Claude AI -->
-      <div class="docs-tile docs-tile--claude">
-        <div class="docs-tile-icon">🤖</div>
-        <div class="docs-tile-tag">Technologie</div>
-        <div class="docs-tile-title">Powered by<br>Claude AI</div>
-        <div class="docs-tile-body" style="margin-top:10px;">
-          Jede Zeile Code, jedes UI-Element, jede Logik entstand im Dialog mit
-          <strong>Claude</strong> von Anthropic. KI als Co-Developer — nicht als Generator.
-        </div>
-        <div class="docs-claude-badge">Anthropic · Claude 4</div>
+    <!-- ZEILE 2: Features (breit, 6 Spalten) -->
+    <div class="docs-tile docs-tile--features">
+      <div class="docs-tile-tag" style="margin-bottom:14px;">Was die App kann — v3.0</div>
+      <div class="docs-features-grid">
+        ${[
+          {
+            icon: "🏦",
+            title: "Kontoverwaltung",
+            desc: "IBAN · IBAN · Depot · Kreditkarte · Farbkodiert",
+          },
+          {
+            icon: "📊",
+            title: "Zahlungsplan",
+            desc: "Cockpit — was bis zum Zahltag fällig ist",
+          },
+          {
+            icon: "📋",
+            title: "Umsätze & Fixkosten",
+            desc: "Liste & Kacheln · Zeitfilter · CSV-Export",
+          },
+          {
+            icon: "📄",
+            title: "Verträge",
+            desc: "Laufzeiten · Badges · Ablaufwarnungen",
+          },
+          {
+            icon: "🎯",
+            title: "Sparziele",
+            desc: "Fortschritt · Sparrate · Deadline",
+          },
+          {
+            icon: "📈",
+            title: "Jahresübersicht",
+            desc: "Balken · Sparquote · Jahresvergleich",
+          },
+          {
+            icon: "↕",
+            title: "Umbuchungen",
+            desc: "Transfers zwischen Konten dokumentieren",
+          },
+          {
+            icon: "🔐",
+            title: "Passwortschutz",
+            desc: "SHA-256 · Privacy Mode · Auto-Lock",
+          },
+          {
+            icon: "🎨",
+            title: "Themes & Schrift",
+            desc: "Nacht-Blau · Crimson · Hochkontrast · 11–20px",
+          },
+          {
+            icon: "📖",
+            title: "Tutorial",
+            desc: "10-Schritt interaktive Einführung",
+          },
+          {
+            icon: "💾",
+            title: "Export / Import",
+            desc: "Vollständige Datensicherung als JSON",
+          },
+          {
+            icon: "🖨️",
+            title: "Kontoauszug",
+            desc: "HTML-Export · druckoptimiert",
+          },
+        ]
+          .map(
+            (f) => `
+          <div class="docs-feature-item">
+            <div class="docs-feature-icon">${f.icon}</div>
+            <div class="docs-feature-title">${f.title}</div>
+            <div class="docs-feature-desc">${f.desc}</div>
+          </div>
+        `,
+          )
+          .join("")}
       </div>
+    </div>
 
-      <!-- Breite Kachel: Features -->
-      <div class="docs-tile docs-tile--features docs-tile--wide">
-        <div class="docs-tile-tag" style="margin-bottom:16px;">Was die App kann</div>
-        <div class="docs-features-grid">
-          ${[
-            {
-              icon: "🏦",
-              title: "Kontoverwaltung",
-              desc: "IBAN, Kontoart, Live-Saldo",
-            },
-            {
-              icon: "📊",
-              title: "Zahlungsplan",
-              desc: "Cockpit bis zum Zahltag",
-            },
-            { icon: "📋", title: "Umsätze", desc: "Liste · Kacheln · Export" },
-            { icon: "📄", title: "Verträge", desc: "Laufzeiten & Badges" },
-            { icon: "🎯", title: "Sparziele", desc: "Fortschritt & Sparrate" },
-            {
-              icon: "📈",
-              title: "Jahresübersicht",
-              desc: "Balken- & Sparquote-Chart",
-            },
-            {
-              icon: "↕",
-              title: "Umbuchungen",
-              desc: "Transfers dokumentieren",
-            },
-            {
-              icon: "🔐",
-              title: "Passwortschutz",
-              desc: "SHA-256 verschlüsselt",
-            },
-            { icon: "🎨", title: "Themes", desc: "Nacht-Blau · Crimson · HC" },
-            { icon: "📖", title: "Tutorial", desc: "10-Schritt Einführung" },
-            {
-              icon: "💾",
-              title: "Export / Import",
-              desc: "Datensicherung als JSON",
-            },
-            {
-              icon: "🖨️",
-              title: "Kontoauszug",
-              desc: "HTML-Export druckbereit",
-            },
-          ]
-            .map(
-              (f) => `
-            <div class="docs-feature-item">
-              <div class="docs-feature-icon">${f.icon}</div>
-              <div class="docs-feature-title">${f.title}</div>
-              <div class="docs-feature-desc">${f.desc}</div>
-            </div>
-          `,
-            )
-            .join("")}
-        </div>
-      </div>
-
-      <!-- Kachel: Roadmap -->
-      <div class="docs-tile docs-tile--roadmap">
-        <div class="docs-tile-icon">🗺️</div>
-        <div class="docs-tile-tag">Roadmap</div>
-        <div class="docs-tile-title">Was kommt</div>
-        <div class="docs-roadmap-list">
-          ${[
-            { label: "CSV-Bankimport", status: "planned" },
-            { label: "Wiederkehrende Käufe", status: "planned" },
-            { label: "Benachrichtigungen", status: "planned" },
-            { label: "Mehrere Profile", status: "idea" },
-            { label: "Mobile App", status: "idea" },
-            { label: "Steuer-Assistent", status: "idea" },
-          ]
-            .map(
-              (r) => `
-            <div class="docs-roadmap-item">
-              <div class="docs-roadmap-dot docs-roadmap-dot--${r.status}"></div>
-              <span>${r.label}</span>
-              <span class="docs-roadmap-badge docs-roadmap-badge--${r.status}">${r.status === "planned" ? "Geplant" : "Idee"}</span>
-            </div>
-          `,
-            )
-            .join("")}
-        </div>
-      </div>
-
-      <!-- Kachel: Stack -->
-      <div class="docs-tile docs-tile--stack">
-        <div class="docs-tile-icon">⚙️</div>
-        <div class="docs-tile-tag">Tech Stack</div>
-        <div class="docs-tile-title">Technologie</div>
-        <div class="docs-stack-list">
-          <div class="docs-stack-item"><span class="docs-stack-label">Runtime</span><span class="docs-stack-val">Electron</span></div>
-          <div class="docs-stack-item"><span class="docs-stack-label">Frontend</span><span class="docs-stack-val">Vanilla JS · CSS</span></div>
-          <div class="docs-stack-item"><span class="docs-stack-label">Charts</span><span class="docs-stack-val">Chart.js</span></div>
-          <div class="docs-stack-item"><span class="docs-stack-label">Speicher</span><span class="docs-stack-val">localStorage</span></div>
-          <div class="docs-stack-item"><span class="docs-stack-label">Crypto</span><span class="docs-stack-val">Web Crypto API</span></div>
-          <div class="docs-stack-item"><span class="docs-stack-label">KI</span><span class="docs-stack-val">Claude 4 Sonnet</span></div>
-        </div>
-      </div>
-
-      <!-- Kachel: Philosophie -->
-      <div class="docs-tile docs-tile--philosophy docs-tile--tall">
-        <div class="docs-tile-icon">💡</div>
-        <div class="docs-tile-tag">Philosophie</div>
-        <div class="docs-tile-title">Weniger ist mehr.</div>
-        <div class="docs-tile-body" style="margin-top:14px;line-height:1.8;">
-          FinanceBoard ist kein Fintech-Produkt. Es ist ein Werkzeug — präzise,
-          schnell, ohne Ablenkung. Keine Gamification, keine Upsells, keine KI die
-          deine Ausgaben „analysiert". Nur Zahlen, die stimmen.
-          <br><br>
-          <strong>Deine Daten gehören dir.</strong> Das war, ist und bleibt das
-          einzige Versprechen dieser App.
-        </div>
-      </div>
-
-      <!-- Kachel: Statistiken -->
+    <!-- ZEILE 3: Stats + Stack + Philosophie (3 gleich) -->
+    <div class="docs-grid docs-grid-3">
       <div class="docs-tile docs-tile--stats">
         <div class="docs-tile-tag">App in Zahlen</div>
         <div class="docs-stats-grid">
           <div class="docs-stat">
             <div class="docs-stat-num">0</div>
-            <div class="docs-stat-lbl">Server-Requests</div>
+            <div class="docs-stat-lbl">Server-Anfragen</div>
           </div>
           <div class="docs-stat">
             <div class="docs-stat-num">100%</div>
@@ -232,9 +174,106 @@ function renderDocs() {
         </div>
       </div>
 
-    </div><!-- /docs-grid -->
+      <div class="docs-tile docs-tile--stack">
+        <div class="docs-tile-icon">⚙️</div>
+        <div class="docs-tile-tag">Tech Stack</div>
+        <div class="docs-stack-list">
+          <div class="docs-stack-item"><span class="docs-stack-label">Runtime</span><span class="docs-stack-val">Electron</span></div>
+          <div class="docs-stack-item"><span class="docs-stack-label">Frontend</span><span class="docs-stack-val">Vanilla JS · CSS</span></div>
+          <div class="docs-stack-item"><span class="docs-stack-label">Charts</span><span class="docs-stack-val">Chart.js 4</span></div>
+          <div class="docs-stack-item"><span class="docs-stack-label">Speicher</span><span class="docs-stack-val">localStorage</span></div>
+          <div class="docs-stack-item"><span class="docs-stack-label">Crypto</span><span class="docs-stack-val">Web Crypto API</span></div>
+          <div class="docs-stack-item"><span class="docs-stack-label">KI</span><span class="docs-stack-val">Claude Sonnet 4</span></div>
+        </div>
+      </div>
 
-    <!-- FOOTER ──────────────────────────── -->
+      <div class="docs-tile docs-tile--philosophy">
+        <div class="docs-tile-icon">💡</div>
+        <div class="docs-tile-tag">Philosophie</div>
+        <div class="docs-tile-title">Weniger ist mehr.</div>
+        <div class="docs-tile-body" style="margin-top:10px;line-height:1.75;">
+          Kein Fintech-Produkt. Ein Werkzeug — präzise, schnell, ohne Ablenkung.
+          Keine Gamification, keine Upsells. Nur Zahlen, die stimmen.
+          <br><br>
+          <strong>Deine Daten gehören dir.</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- ZEILE 4: Roadmap als Schlangenweg -->
+    <div class="docs-tile docs-tile--roadmap-full">
+      <div class="docs-tile-tag" style="margin-bottom:18px;">Roadmap · Entwicklungsweg</div>
+      <div class="docs-roadmap-snake">
+        ${[
+          {
+            v: "v1",
+            label: "Dashboard & Konten",
+            status: "done",
+            desc: "Grundstruktur, Konten, Saldo",
+          },
+          {
+            v: "v2",
+            label: "Tutorial & IBAN",
+            status: "done",
+            desc: "10-Schritt Tutorial, IBAN-Formatierung",
+          },
+          {
+            v: "v3",
+            label: "Ziele · Charts · Themes",
+            status: "current",
+            desc: "Sparziele, Jahresübersicht, Crimson Theme, Privacy Mode",
+          },
+          {
+            v: "v4",
+            label: "CSV-Bankimport",
+            status: "planned",
+            desc: "Direktimport aus Bankexports",
+          },
+          {
+            v: "v5",
+            label: "Wiederkehrende Ereignisse",
+            status: "planned",
+            desc: "Automatische Buchungsvorschläge",
+          },
+          {
+            v: "v6",
+            label: "Benachrichtigungen",
+            status: "idea",
+            desc: "Ablaufwarnungen & Erinnerungen",
+          },
+          {
+            v: "v7",
+            label: "Mehrere Profile",
+            status: "idea",
+            desc: "Familie, Partner, Business trennen",
+          },
+          {
+            v: "v8",
+            label: "Mobile App",
+            status: "idea",
+            desc: "iOS & Android Companion",
+          },
+        ]
+          .map(
+            (r, i) => `
+          <div class="docs-snake-item docs-snake-item--${r.status} ${i % 2 === 0 ? "even" : "odd"}">
+            <div class="docs-snake-connector ${i % 2 === 0 ? "right" : "left"}"></div>
+            <div class="docs-snake-node">
+              <div class="docs-snake-dot docs-snake-dot--${r.status}"></div>
+              <div class="docs-snake-version">${r.v}</div>
+            </div>
+            <div class="docs-snake-content">
+              <div class="docs-snake-label">${r.label}</div>
+              <div class="docs-snake-desc">${r.desc}</div>
+            </div>
+          </div>
+        `,
+          )
+          .join("")}
+      </div>
+    </div>
+
+    <!-- FOOTER -->
     <div class="docs-footer">
       <div class="docs-footer-logo">Candlescope FinanceBoard</div>
       <div class="docs-footer-sub">v3.0 · 2026 · Entwickelt mit Claude AI von Anthropic</div>

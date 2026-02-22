@@ -117,11 +117,7 @@ function openAccountModal(id = null) {
     : "Neues Konto";
   document.getElementById("accFLabel").value = acc ? acc.label : "";
   document.getElementById("accFSub").value = acc ? acc.sub || "" : "";
-  document.getElementById("accFIban").value = acc
-    ? acc.iban
-      ? formatIban(acc.iban)
-      : ""
-    : "";
+  // Nummernfelder werden dynamisch via updateAccNumberFields() gesetzt
   document.getElementById("accFBalance").value =
     acc && acc.balance !== 0 ? acc.balance.toFixed(2).replace(".", ",") : "";
 

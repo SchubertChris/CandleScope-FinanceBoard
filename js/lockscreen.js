@@ -129,3 +129,92 @@ function checkLock() {
 
   showLockScreen("unlock");
 }
+
+// ══════════════════════════════════════
+//  PRIVACY MODE + INAKTIVITÄTS-TIMER
+// ══════════════════════════════════════
+
+let _inactivityTimer = null;
+let _privacyActive = false;
+const INACTIVITY_MS = 5 * 60 * 1000; // 5 Minuten
+
+function _resetInactivityTimer() {
+  clearTimeout(_inactivityTimer);
+  if (!CFG?.privacyAutoLock) return;
+  _inactivityTimer = setTimeout(() => {
+    if (localStorage.getItem(LOCK_KEY)) {
+      _showPrivacyBlur(true);
+    }
+  }, INACTIVITY_MS);
+}
+
+function _showPrivacyBlur(show) {
+  _privacyActive = show;
+  let overlay = document.getElementById("privacyOverlay");
+  if (show) {
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "privacyOverlay";
+      overlay.style.cssText = `
+        position:fixed;inset:0;z-index:9998;
+        background:rgba(8,10,18,0.96);
+        backdrop-filter:blur(24px);
+        display:flex;align-items:center;justify-content:center;
+        flex-direction:column;gap:16px;
+      `;
+      overlay.innerHTML = `
+        <div style="font-size:2.5em;filter:drop-shadow(0 0 20px rgba(77,158,255,.4))">🔒</div>
+        <div style="font-family:var(--sans);font-size:1em;font-weight:700;color:var(--text);letter-spacing:-.3px;">Inaktivitäts-Sperre</div>
+        <div style="font-size:.75em;color:var(--text3);margin-bottom:8px;">Nach 5 Min. Inaktivität gesperrt</div>
+        <button class="btn primary" onclick="unlockPrivacy()" style="min-width:160px;">
+          Entsperren
+        </button>
+      `;
+      document.body.appendChild(overlay);
+    }
+    overlay.style.display = "flex";
+  } else {
+    if (overlay) overlay.style.display = "none";
+  }
+}
+
+async function unlockPrivacy() {
+  if (!localStorage.getItem(LOCK_KEY)) {
+    _showPrivacyBlur(false);
+    _resetInactivityTimer();
+    return;
+  }
+  // Passwort erneut abfragen
+  const pw = prompt("Passwort eingeben:");
+  if (!pw) return;
+  const hash = await sha256(pw);
+  if (hash === localStorage.getItem(LOCK_KEY)) {
+    _showPrivacyBlur(false);
+    _resetInactivityTimer();
+  } else {
+    alert("Falsches Passwort");
+  }
+}
+
+// Privacy blur toggle (manuell)
+function togglePrivacyBlur() {
+  if (_privacyActive) {
+    unlockPrivacy();
+  } else {
+    _showPrivacyBlur(true);
+  }
+}
+
+// Aktivitätserkennung
+["mousemove", "mousedown", "keydown", "scroll", "touchstart", "click"].forEach(
+  (ev) => {
+    document.addEventListener(
+      ev,
+      () => {
+        if (_privacyActive) return;
+        _resetInactivityTimer();
+      },
+      { passive: true },
+    );
+  },
+);

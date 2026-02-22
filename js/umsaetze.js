@@ -38,7 +38,7 @@ function renderPosten() {
             )
             .join("")}
         </div>
-        <button class="btn" onclick="exportKontoauszug()">⬇ Kontoauszug</button>
+        <button class="btn" onclick="openAuszugDialog()">⬇ Kontoauszug</button>
         <button class="btn" onclick="openModal(null,'transfer')">⇄ Umbuchung</button>
         <button class="btn primary" onclick="openModal()">+ Neuer Posten</button>
       </div>`;
@@ -295,9 +295,157 @@ function quickDeletePosten(i) {
 }
 
 // ── KONTOAUSZUG EXPORT ────────────────
-function exportKontoauszug() {
+// ── KONTOAUSZUG DIALOG ───────────────
+function openAuszugDialog() {
+  // Build account options
+  const accOpts = S.accounts
+    .map((a) => `<option value="${a.id}">${esc(a.label)}</option>`)
+    .join("");
+
+  // Remove any existing dialog
+  document.getElementById("auszugDialog")?.remove();
+
+  const dlg = document.createElement("div");
+  dlg.id = "auszugDialog";
+  dlg.style.cssText = `
+    position:fixed;inset:0;z-index:1000;
+    background:rgba(0,0,0,.55);backdrop-filter:blur(6px);
+    display:flex;align-items:center;justify-content:center;
+  `;
+
   const n = today();
-  const data = _filteredPosten();
+  const firstOfMonth = `${n.getFullYear()}-${String(n.getMonth() + 1).padStart(2, "0")}-01`;
+  const todayStr = n.toISOString().slice(0, 10);
+  const yearStart = `${n.getFullYear()}-01-01`;
+
+  dlg.innerHTML = `
+    <div style="background:var(--panel);border:1px solid var(--border2);border-radius:16px;padding:28px;width:420px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,.4);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <div>
+          <div style="font-size:1em;font-weight:700;color:var(--text);">Kontoauszug erstellen</div>
+          <div style="font-size:.7em;color:var(--text3);margin-top:2px;">Zeitraum & Filter wählen</div>
+        </div>
+        <div onclick="document.getElementById('auszugDialog').remove()" style="cursor:pointer;color:var(--text3);font-size:1.2em;padding:4px 8px;">✕</div>
+      </div>
+
+      <!-- Schnellauswahl -->
+      <div style="margin-bottom:16px;">
+        <div style="font-size:.65em;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text3);margin-bottom:8px;">Schnellauswahl</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="btn sm" onclick="auszugQuick('month','${firstOfMonth}','${todayStr}')">Dieser Monat</button>
+          <button class="btn sm" onclick="auszugQuick('quarter','${_quarterStart()}','${todayStr}')">Dieses Quartal</button>
+          <button class="btn sm" onclick="auszugQuick('year','${yearStart}','${todayStr}')">Dieses Jahr</button>
+          <button class="btn sm" onclick="auszugQuick('all','','')">Alles</button>
+        </div>
+      </div>
+
+      <!-- Zeitraum manuell -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+        <div>
+          <label style="font-size:.68em;color:var(--text3);display:block;margin-bottom:4px;">Von</label>
+          <input id="azFrom" type="date" value="${firstOfMonth}"
+            style="width:100%;box-sizing:border-box;background:var(--panel2);border:1px solid var(--border2);border-radius:var(--r1);padding:7px 10px;color:var(--text);font-size:.82em;outline:none;">
+        </div>
+        <div>
+          <label style="font-size:.68em;color:var(--text3);display:block;margin-bottom:4px;">Bis</label>
+          <input id="azTo" type="date" value="${todayStr}"
+            style="width:100%;box-sizing:border-box;background:var(--panel2);border:1px solid var(--border2);border-radius:var(--r1);padding:7px 10px;color:var(--text);font-size:.82em;outline:none;">
+        </div>
+      </div>
+
+      <!-- Typ Filter -->
+      <div style="margin-bottom:16px;">
+        <label style="font-size:.68em;color:var(--text3);display:block;margin-bottom:6px;">Art</label>
+        <div style="display:flex;gap:8px;">
+          ${["alle", "einnahmen", "ausgaben"]
+            .map(
+              (t) => `
+            <label style="display:flex;align-items:center;gap:5px;font-size:.78em;color:var(--text2);cursor:pointer;">
+              <input type="radio" name="azTyp" value="${t}" ${t === "alle" ? "checked" : ""} style="accent-color:var(--blue);"> ${t.charAt(0).toUpperCase() + t.slice(1)}
+            </label>
+          `,
+            )
+            .join("")}
+        </div>
+      </div>
+
+      <!-- Konto Filter -->
+      <div style="margin-bottom:20px;">
+        <label style="font-size:.68em;color:var(--text3);display:block;margin-bottom:4px;">Konto</label>
+        <select id="azAcc" style="width:100%;background:var(--panel2);border:1px solid var(--border2);border-radius:var(--r1);padding:7px 10px;color:var(--text);font-size:.82em;outline:none;">
+          <option value="">Alle Konten</option>
+          ${accOpts}
+        </select>
+      </div>
+
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button class="btn" onclick="document.getElementById('auszugDialog').remove()">Abbrechen</button>
+        <button class="btn primary" onclick="runAuszugExport()">⬇ Exportieren</button>
+      </div>
+    </div>`;
+
+  document.body.appendChild(dlg);
+  // Close on backdrop click
+  dlg.addEventListener("click", (e) => {
+    if (e.target === dlg) dlg.remove();
+  });
+}
+
+function _quarterStart() {
+  const n = today();
+  const q = Math.floor(n.getMonth() / 3);
+  return `${n.getFullYear()}-${String(q * 3 + 1).padStart(2, "0")}-01`;
+}
+
+function auszugQuick(mode, from, to) {
+  if (from) document.getElementById("azFrom").value = from;
+  if (to) document.getElementById("azTo").value = to;
+  if (mode === "all") {
+    document.getElementById("azFrom").value = "";
+    document.getElementById("azTo").value = "";
+  }
+}
+
+function runAuszugExport() {
+  const from = document.getElementById("azFrom")?.value || "";
+  const to = document.getElementById("azTo")?.value || "";
+  const typ =
+    document.querySelector('input[name="azTyp"]:checked')?.value || "alle";
+  const accId = document.getElementById("azAcc")?.value || "";
+  document.getElementById("auszugDialog")?.remove();
+  exportKontoauszug(from, to, typ, accId);
+}
+
+function exportKontoauszug(fromDate, toDate, typ, accId) {
+  const n = today();
+  // Apply export-specific filters on top of current view
+  let data = S.data;
+  if (fromDate) {
+    const f = new Date(fromDate);
+    data = data.filter(
+      (p) =>
+        !p.contractStart ||
+        new Date(p.contractStart) <= new Date(toDate || "9999-12-31"),
+    );
+  }
+  if (toDate) {
+    const t = new Date(toDate);
+    data = data.filter(
+      (p) =>
+        !p.contractEnd ||
+        new Date(p.contractEnd) >= new Date(fromDate || "0000-01-01"),
+    );
+  }
+  if (typ === "einnahmen") data = data.filter((p) => p.type === "einnahme");
+  if (typ === "ausgaben") data = data.filter((p) => p.type === "ausgabe");
+  if (accId) data = data.filter((p) => p.accountId === accId);
+
+  const rangeLabel =
+    fromDate && toDate
+      ? `${new Date(fromDate).toLocaleDateString("de-DE")} – ${new Date(toDate).toLocaleDateString("de-DE")}`
+      : fromDate
+        ? `Ab ${new Date(fromDate).toLocaleDateString("de-DE")}`
+        : "Alle Zeiträume";
   let totIn = 0,
     totOut = 0;
   data.forEach((p) => {
@@ -345,7 +493,7 @@ function exportKontoauszug() {
 </style></head><body>
 <div class="header">
   <div><div class="hlogo">Candlescope FinanceBoard</div><div class="hsub">Persönliche Finanzen · Kontoauszug</div></div>
-  <div class="hdate">Erstellt: ${n.toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" })}<br>Filter: ${_filterLabel(postenFilter)}</div>
+  <div class="hdate">Erstellt: ${n.toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" })}<br>Zeitraum: ${rangeLabel}</div>
 </div>
 <div class="body">
   <h2>Zusammenfassung</h2>

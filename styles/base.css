@@ -38,6 +38,67 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* Fix 2: user-select none global, außer Inputs und select-allowed Elemente */
+body,
+.sidebar,
+nav,
+.topbar,
+.nav-item,
+.nav-section,
+.logo,
+.btn,
+.panel,
+.panel-head,
+.panel-title,
+.panel-tag,
+.kpi,
+.kpi-label,
+.badge,
+.month-card,
+.goal-card,
+.ct-tile,
+.ct-row,
+.ct-header,
+.acc-row,
+.acc-type-tag,
+.acc-name,
+.docs-wrap,
+.docs-hero,
+.docs-grid,
+.docs-tile,
+.settings-wrap,
+.settings-card,
+.sidebar-foot,
+.save-status,
+.tut-trigger {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Inputs, Textwerte, Kontonummern: kopierbar */
+input,
+textarea,
+select,
+.acc-inp,
+.cedit,
+.cedit-sel,
+.acc-iban,
+.goal-num-val,
+.mc-bal,
+.kpi-val,
+.sum-line-val,
+tbody td.amt-in,
+tbody td.amt-out,
+tbody td.amt-trf,
+.cc-block,
+#accFIban,
+#accFDepot,
+#ccExp,
+#ccCvv {
+  user-select: text;
+  -webkit-user-select: text;
+}
 html {
   scrollbar-color: var(--border2) transparent;
   scrollbar-width: thin;
@@ -45,7 +106,7 @@ html {
 body {
   font-family: var(--sans);
   color: var(--text);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.5;
   min-height: 100vh;
   overflow-x: hidden;

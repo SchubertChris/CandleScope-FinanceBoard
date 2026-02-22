@@ -7,8 +7,10 @@ const SETTINGS_KEY = "csf_settings";
 const DEFAULT_SETTINGS = {
   theme: "dark", // 'dark' | 'anthracite' | 'highcontrast' | 'crimson'
   font: "default", // 'default' | 'mono' | 'large'
-  fontSize: 14, // px, 11-18
+  fontSize: 15, // px, 11-20 · Standard Stufe 5
   autosave: true,
+  privacyAutoLock: false, // Auto-Sperre nach 5 Min Inaktivität
+  userName: "", // Benutzername für Begrüßung
   bgImage: null, // base64 oder null
   pwEnabled: false,
 };
@@ -33,6 +35,7 @@ function saveSettings() {
 
 // ── APPLY ─────────────────────────────
 function applySettings() {
+  if (typeof _renderSidebarGreeting === "function") _renderSidebarGreeting();
   const root = document.documentElement;
 
   // Theme
@@ -221,6 +224,15 @@ function renderSettings() {
           <div class="toggle-knob"></div>
         </div>
       </div>
+      <div class="settings-row" style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+        <div>
+          <div class="settings-row-label">🔒 Privacy Auto-Lock</div>
+          <div class="settings-row-desc">Sperrt die App nach 5 Min. Inaktivität automatisch</div>
+        </div>
+        <div class="toggle-switch ${CFG.privacyAutoLock ? "on" : ""}" onclick="togglePrivacyAutoLock()">
+          <div class="toggle-knob"></div>
+        </div>
+      </div>
     </div>
 
     <!-- SICHERHEIT -->
@@ -321,6 +333,14 @@ function toggleAutosave() {
   CFG.autosave = !CFG.autosave;
   saveSettings();
   renderSettings();
+}
+
+function togglePrivacyAutoLock() {
+  CFG.privacyAutoLock = !CFG.privacyAutoLock;
+  saveSettings();
+  renderSettings();
+  if (CFG.privacyAutoLock) _resetInactivityTimer?.();
+  else clearTimeout(window._inactivityTimer);
 }
 
 function uploadBg(input) {

@@ -139,7 +139,7 @@ function _renderCTList(el, items) {
 function _renderCTTiles(el, items) {
   const sorted = sortArr(items, ctSort.k, ctSort.asc);
 
-  el.innerHTML = `<div class="ct-tiles">
+  el.innerHTML = `<div class="ct-tiles ct-tiles-v2">
     ${sorted
       .map((p) => {
         const idx = S.data.indexOf(p);
@@ -148,24 +148,31 @@ function _renderCTTiles(el, items) {
         const acc = S.accounts.find((a) => a.id === p.accountId);
         const { badge, fillCls, pct } = _ctStatus(p);
 
+        const accentColor =
+          fillCls === "red"
+            ? "var(--red)"
+            : fillCls === "amber"
+              ? "var(--amber)"
+              : "var(--blue)";
         return `<div class="ct-tile">
+        <div class="ct-tile-accent" style="background:${accentColor}"></div>
         <div class="ct-tile-head">
-          <div>
+          <div style="flex:1;min-width:0;">
             <div class="ct-name">${esc(p.name)}</div>
-            ${p.note ? `<div class="ct-note">${esc(p.note)}</div>` : ""}
+            ${p.note ? `<div class="ct-note" style="margin-top:3px;">${esc(p.note)}</div>` : ""}
           </div>
-          <button class="btn sm" onclick="openModal(${idx})">✎</button>
+          <button class="btn sm" onclick="openModal(${idx})" style="flex-shrink:0;">✎</button>
         </div>
-        <div class="ct-prog" style="margin:10px 0 6px;"><div class="ct-prog-fill ${fillCls}" style="width:${pct.toFixed(0)}%"></div></div>
-        <div class="ct-tile-meta">
-          <div><span class="ct-meta-lbl">Start</span><span>${s ? s.toLocaleDateString("de-DE", { month: "2-digit", year: "numeric" }) : "—"}</span></div>
-          <div><span class="ct-meta-lbl">Ende</span><span>${e ? e.toLocaleDateString("de-DE") : "—"}</span></div>
-          <div><span class="ct-meta-lbl">Betrag</span><span style="font-family:var(--mono)">${fm(parseFloat(p.amount) || 0)}</span></div>
-          <div><span class="ct-meta-lbl">Intervall</span><span>${p.interval}</span></div>
+        <div class="ct-tile-amount">${p.type === "ausgabe" ? "−" : "+"} ${fm(parseFloat(p.amount) || 0)}</div>
+        <div class="ct-tile-interval">${p.interval || "—"}</div>
+        <div class="ct-prog" style="margin:14px 0 8px;"><div class="ct-prog-fill ${fillCls}" style="width:${pct.toFixed(0)}%"></div></div>
+        <div class="ct-tile-dates">
+          <div><div class="ct-meta-lbl">Start</div><div class="ct-date-val">${s ? s.toLocaleDateString("de-DE", { month: "2-digit", year: "numeric" }) : "—"}</div></div>
+          <div style="text-align:right;"><div class="ct-meta-lbl">Ende</div><div class="ct-date-val">${e ? e.toLocaleDateString("de-DE") : "—"}</div></div>
         </div>
         <div class="ct-tile-foot">
           ${badge}
-          ${acc ? `<span class="ct-acc-dot" style="background:${acc.color}"></span><span style="font-size:.7em;color:var(--text2)">${esc(acc.label)}</span>` : ""}
+          ${acc ? `<span class="ct-acc-dot" style="background:${acc.color};margin-left:auto;"></span><span style="font-size:.7em;color:var(--text2)">${esc(acc.label)}</span>` : ""}
         </div>
       </div>`;
       })

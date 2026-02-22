@@ -2,7 +2,7 @@
    SETTINGS PAGE
 ══════════════════════════════════════ */
 .settings-wrap {
-  max-width: 1440px;
+  max-width: 720px;
   margin: 0 auto;
   padding: 0 0 40px;
   display: flex;
