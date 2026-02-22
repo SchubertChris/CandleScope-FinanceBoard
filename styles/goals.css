@@ -1,0 +1,188 @@
+/* ══════════════════════════════════════
+   GOALS — Sparziele
+══════════════════════════════════════ */
+
+/* ── GRID ── */
+.goals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+/* ── CARD ── */
+.goal-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 18px;
+  transition: border-color 0.15s;
+}
+.goal-card:hover {
+  border-color: rgba(77, 158, 255, 0.25);
+}
+.goal-card.done {
+  border-color: rgba(0, 229, 160, 0.3);
+}
+
+.goal-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.goal-icon-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  flex-shrink: 0;
+}
+.goal-card-meta {
+  flex: 1;
+  min-width: 0;
+}
+.goal-card-name {
+  font-size: 0.88em;
+  font-weight: 700;
+  color: var(--text1);
+}
+.goal-card-deadline {
+  font-size: 0.68em;
+  color: var(--text3);
+  margin-top: 2px;
+}
+
+/* Progress */
+.goal-prog-track {
+  height: 6px;
+  background: var(--panel2);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.goal-prog-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Numbers */
+.goal-card-nums {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.goal-num-val {
+  font-family: var(--mono);
+  font-size: 0.82em;
+  font-weight: 600;
+  color: var(--text1);
+}
+.goal-num-val.done-val {
+  color: var(--green);
+}
+.goal-num-lbl {
+  font-size: 0.65em;
+  color: var(--text3);
+  margin-top: 2px;
+}
+
+/* Rate row */
+.goal-rate-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7em;
+  color: var(--text2);
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── MINI (Dashboard Widget) ── */
+.goal-mini {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.goal-mini:last-child {
+  border-bottom: none;
+}
+.goal-mini-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78em;
+  color: var(--text2);
+  margin-bottom: 5px;
+}
+.goal-mini-track {
+  height: 4px;
+  background: var(--panel2);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.goal-mini-fill {
+  height: 100%;
+  border-radius: 2px;
+}
+.goal-mini-vals {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 0.68em;
+  color: var(--text3);
+}
+
+/* ── ICON PICKER ── */
+.goal-icon-picker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.goal-icon-opt {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  font-size: 1.1em;
+  transition: all 0.12s;
+}
+.goal-icon-opt:hover {
+  background: var(--panel2);
+}
+.goal-icon-opt.active {
+  border-color: var(--blue);
+  background: rgba(77, 158, 255, 0.1);
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+.empty-icon {
+  font-size: 2.5em;
+  margin-bottom: 12px;
+  opacity: 0.3;
+}
+.empty-title {
+  font-size: 0.95em;
+  font-weight: 700;
+  color: var(--text2);
+  margin-bottom: 6px;
+}
+.empty-sub {
+  font-size: 0.78em;
+  color: var(--text3);
+  max-width: 280px;
+  line-height: 1.5;
+}

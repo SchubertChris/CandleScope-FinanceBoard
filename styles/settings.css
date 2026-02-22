@@ -1,0 +1,343 @@
+/* ══════════════════════════════════════
+   SETTINGS PAGE
+══════════════════════════════════════ */
+.settings-wrap {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.settings-header {
+  padding: 4px 0 8px;
+}
+
+.settings-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 20px 22px;
+}
+.settings-card-title {
+  font-family: var(--sans);
+  font-size: 0.72em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text2);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.settings-card-title svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  stroke: var(--blue);
+}
+
+/* Theme */
+.theme-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.theme-option {
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+.theme-option:hover {
+  border-color: rgba(77, 158, 255, 0.4);
+  background: var(--panel2);
+}
+.theme-option.active {
+  border-color: var(--blue);
+  background: rgba(77, 158, 255, 0.08);
+}
+.theme-swatch {
+  width: 100%;
+  height: 40px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.theme-swatch-bar {
+  width: 18px;
+  height: 6px;
+  border-radius: 3px;
+}
+.theme-swatch-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.theme-option-label {
+  font-size: 0.78em;
+  font-weight: 600;
+  color: var(--text1);
+}
+.theme-option-desc {
+  font-size: 0.65em;
+  color: var(--text3);
+  margin-top: 2px;
+}
+
+/* Font */
+.font-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.font-option {
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.font-option:hover {
+  border-color: rgba(77, 158, 255, 0.4);
+  background: var(--panel2);
+}
+.font-option.active {
+  border-color: var(--blue);
+  background: rgba(77, 158, 255, 0.08);
+}
+.font-sample {
+  font-size: 1.6em;
+  font-weight: 700;
+  color: var(--blue);
+  min-width: 32px;
+  text-align: center;
+}
+.font-sample-default {
+  font-family: "Space Grotesk", sans-serif;
+}
+.font-sample-mono {
+  font-family: "DM Mono", monospace;
+}
+.font-sample-large {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.9em;
+}
+.font-option-label {
+  font-size: 0.78em;
+  font-weight: 600;
+  color: var(--text1);
+}
+.font-option-desc {
+  font-size: 0.65em;
+  color: var(--text3);
+  margin-top: 2px;
+}
+
+/* BG */
+.bg-preview-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.bg-preview {
+  width: 120px;
+  height: 70px;
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  background: var(--panel2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.bg-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Row / Toggle */
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.settings-row-label {
+  font-size: 0.82em;
+  font-weight: 600;
+  color: var(--text1);
+}
+.settings-row-desc {
+  font-size: 0.7em;
+  color: var(--text3);
+  margin-top: 2px;
+}
+.toggle-switch {
+  width: 42px;
+  height: 24px;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.toggle-switch.on {
+  background: rgba(77, 158, 255, 0.3);
+  border-color: var(--blue);
+}
+.toggle-knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--text3);
+  transition: all 0.2s;
+}
+.toggle-switch.on .toggle-knob {
+  left: 21px;
+  background: var(--blue);
+}
+
+/* PW */
+.pw-change-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.settings-input {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r1);
+  padding: 8px 12px;
+  color: var(--text1);
+  font-family: var(--sans);
+  font-size: 0.82em;
+  transition: border-color 0.12s;
+  box-sizing: border-box;
+}
+.settings-input:focus {
+  outline: none;
+  border-color: var(--blue);
+}
+.settings-err {
+  font-size: 0.72em;
+  color: var(--red);
+  margin-top: 6px;
+  min-height: 16px;
+}
+
+/* Data */
+.data-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.data-actions .btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Font Apply */
+[data-font="mono"] {
+  --sans: "DM Mono", monospace;
+  font-size: 13px;
+}
+[data-font="large"] {
+  font-size: 15px;
+}
+
+/* ══════════════════════════════════════
+   THEME VARS
+   Crimson: gleiche Struktur wie Nacht-Blau
+   aber alle Blautöne → Rottöne
+══════════════════════════════════════ */
+
+/* ── CRIMSON — Dunkles Anthrazit mit Rottönen ── */
+[data-theme="crimson"] {
+  /* Backgrounds — identische Tiefe wie dark, aber roter Unterton */
+  --bg: #0d0a0b33;
+  --panel: #00000080;
+  --panel2: #1f1416;
+  --panel3: #3a2020;
+  --border: #2a1618;
+  --border2: #3d1e20;
+
+  /* Text — hell und neutral wie Nacht-Blau, kein roter oder blauer Stich */
+  --text: #f0ecee; /* minimal wärmer als #e8edf8, aber nicht rötlich */
+  --text2: #c8cdd8; /* neutrales Hellgrau — kein Blau-Stich mehr */
+  --text3: #8a8e98; /* neutrales Mittelgrau */
+
+  /* Akzent — Rot statt Blau, gleiche Sättigung/Helligkeit */
+  --blue: #e05060; /* Hauptakzent: leuchtendes Rot  ≈ #4d9eff */
+  --blue2: #a02840; /* Sekundär: tiefes Weinrot       ≈ #7b5fff */
+  --blue-bg: #1a0508; /* Akzent-Hintergrund             ≈ #05101e */
+
+  /* Semantische Farben — leicht angepasst für warmes Theme */
+  --green: #00d48a;
+  --green-d: #003d28;
+  --green-bg: #001a10;
+  --red: #ff6b7a;
+  --red-d: #4a0f18;
+  --red-bg: #1a0508;
+  --amber: #ff9f47;
+  --amber-d: #4a2800;
+  --amber-bg: #1a0e00;
+  --teal: #00c4bc;
+
+  /* Glow — Rot statt Blau */
+  --glow-g: 0 0 20px rgba(0, 212, 138, 0.15);
+  --glow-b: 0 0 20px rgba(224, 80, 96, 0.15);
+
+  /* Sonstiges */
+  --input-bg: #1a0c0e;
+  --r: 16px;
+  --r2: 12px;
+}
+
+/* ── HOCHKONTRAST ── */
+[data-theme="highcontrast"] {
+  --bg: #000000;
+  --panel: #0a0a0a;
+  --panel2: #111111;
+  --panel3: #1e1e1e;
+  --border: rgba(255, 255, 255, 0.2);
+  --border2: rgba(255, 255, 255, 0.3);
+  --text: #ffffff;
+  --text2: #dddddd;
+  --text3: #999999;
+  --blue: #facc15;
+  --blue2: #fbbf24;
+  --blue-bg: #1a1400;
+  --green: #4ade80;
+  --green-d: #14532d;
+  --green-bg: #0a1f0f;
+  --red: #f87171;
+  --red-d: #450a0a;
+  --red-bg: #1a0505;
+  --amber: #fb923c;
+  --teal: #2dd4bf;
+  --input-bg: #111111;
+  --glow-g: 0 0 20px rgba(74, 222, 128, 0.15);
+  --glow-b: 0 0 20px rgba(250, 204, 21, 0.15);
+}

@@ -1,0 +1,527 @@
+/* ══════════════════════════════════════
+   DOCS — Über diese App
+   Windows-Kachel-Raster + Apple-Eleganz
+══════════════════════════════════════ */
+
+.docs-wrap {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 0 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── HERO ── */
+.docs-hero {
+  position: relative;
+  background: linear-gradient(135deg, #0a0f1e 0%, #0d1628 50%, #080d1a 100%);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: 40px 44px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  min-height: 200px;
+}
+.docs-hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse at 10% 50%,
+      rgba(77, 158, 255, 0.12) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse at 90% 20%,
+      rgba(123, 95, 255, 0.08) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+}
+.docs-hero-glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: -100px;
+  right: 200px;
+  background: radial-gradient(
+    circle,
+    rgba(77, 158, 255, 0.06) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+.docs-hero-content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+.docs-hero-badge {
+  display: inline-flex;
+  font-family: var(--mono);
+  font-size: 0.62em;
+  font-weight: 600;
+  color: var(--blue);
+  background: rgba(77, 158, 255, 0.1);
+  border: 1px solid rgba(77, 158, 255, 0.25);
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+.docs-hero-title {
+  font-family: var(--sans);
+  font-size: 2.2em;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+.docs-hero-title span {
+  color: var(--blue);
+}
+.docs-hero-sub {
+  font-size: 0.82em;
+  color: var(--text3);
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+.docs-hero-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.docs-tag {
+  font-size: 0.7em;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border2);
+  color: var(--text2);
+  background: rgba(255, 255, 255, 0.03);
+  letter-spacing: 0.3px;
+}
+
+/* Hero Visual */
+.docs-hero-visual {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+.docs-hero-card {
+  width: 160px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.docs-hc-bar {
+  height: 8px;
+  border-radius: 4px;
+  opacity: 0.7;
+  animation: docs-bar-grow 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  transform-origin: left;
+}
+@keyframes docs-bar-grow {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 0.7;
+  }
+}
+.docs-hc-bar:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.docs-hc-bar:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.docs-hc-label {
+  font-family: var(--mono);
+  font-size: 0.6em;
+  color: var(--text3);
+  margin-top: 4px;
+  text-align: center;
+}
+
+/* ── KACHEL-GRID ── */
+.docs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* Basis-Kachel */
+.docs-tile {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px 20px;
+  position: relative;
+  overflow: hidden;
+  transition:
+    border-color 0.2s,
+    transform 0.15s;
+}
+.docs-tile:hover {
+  border-color: var(--border2);
+  transform: translateY(-1px);
+}
+.docs-tile-icon {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  display: block;
+  filter: drop-shadow(0 0 12px rgba(77, 158, 255, 0.2));
+}
+.docs-tile-tag {
+  font-family: var(--mono);
+  font-size: 0.58em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--blue);
+  margin-bottom: 5px;
+}
+.docs-tile-title {
+  font-family: var(--sans);
+  font-size: 0.95em;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+.docs-tile-body {
+  font-size: 0.75em;
+  color: var(--text3);
+  line-height: 1.65;
+}
+.docs-tile-body strong {
+  color: var(--text2);
+}
+
+/* Breite Kachel */
+.docs-tile--wide {
+  grid-column: span 2;
+}
+/* Hohe Kachel */
+.docs-tile--tall {
+  grid-row: span 2;
+}
+
+/* Akzent-Kachel */
+.docs-tile--accent {
+  background: linear-gradient(
+    135deg,
+    rgba(77, 158, 255, 0.08) 0%,
+    rgba(123, 95, 255, 0.05) 100%
+  );
+  border-color: rgba(77, 158, 255, 0.2);
+}
+.docs-tile--accent::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--blue), var(--blue2));
+  border-radius: 16px 16px 0 0;
+}
+.docs-tile--accent .docs-tile-content {
+  flex: 1;
+}
+.docs-tile--accent {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+/* Dark Kachel */
+.docs-tile--dark {
+  background: rgba(0, 0, 0, 0.3);
+  border-color: var(--border);
+}
+
+/* Glass Kachel */
+.docs-tile--glass {
+  background: rgba(255, 255, 255, 0.025);
+  border-color: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+/* Claude Kachel */
+.docs-tile--claude {
+  background: linear-gradient(135deg, #0d1020 0%, #111828 100%);
+  border-color: rgba(123, 95, 255, 0.25);
+}
+.docs-tile--claude::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(
+    circle,
+    rgba(123, 95, 255, 0.15) 0%,
+    transparent 70%
+  );
+}
+.docs-claude-badge {
+  display: inline-flex;
+  margin-top: 12px;
+  font-family: var(--mono);
+  font-size: 0.6em;
+  color: #a78bfa;
+  background: rgba(123, 95, 255, 0.1);
+  border: 1px solid rgba(123, 95, 255, 0.25);
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+/* Chips */
+.docs-tile-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.docs-chip {
+  font-family: var(--mono);
+  font-size: 0.6em;
+  color: var(--text3);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* Version Liste */
+.docs-version-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.docs-vitem {
+  font-size: 0.72em;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  color: var(--text3);
+}
+.docs-vitem--done {
+  background: rgba(0, 229, 160, 0.06);
+  border-color: rgba(0, 229, 160, 0.12);
+  color: var(--green);
+}
+.docs-vitem--done::before {
+  content: "✓ ";
+  opacity: 0.7;
+}
+.docs-vitem--next {
+  background: rgba(77, 158, 255, 0.06);
+  border-color: rgba(77, 158, 255, 0.15);
+  color: var(--blue);
+}
+.docs-vitem--next::before {
+  content: "→ ";
+}
+
+/* Features Grid */
+.docs-tile--features {
+  padding: 22px 22px 24px;
+}
+.docs-features-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+}
+.docs-feature-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 10px;
+  text-align: center;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
+}
+.docs-feature-item:hover {
+  border-color: var(--border2);
+  background: rgba(77, 158, 255, 0.04);
+}
+.docs-feature-icon {
+  font-size: 1.4em;
+  margin-bottom: 6px;
+}
+.docs-feature-title {
+  font-size: 0.68em;
+  font-weight: 700;
+  color: var(--text2);
+  margin-bottom: 3px;
+  line-height: 1.2;
+}
+.docs-feature-desc {
+  font-size: 0.6em;
+  color: var(--text3);
+  line-height: 1.3;
+}
+
+.docs-roadmap-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.docs-roadmap-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75em;
+  color: var(--text2);
+}
+.docs-roadmap-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.docs-roadmap-dot--planned {
+  background: var(--blue);
+  box-shadow: 0 0 6px var(--blue);
+}
+.docs-roadmap-dot--idea {
+  background: var(--text3);
+}
+.docs-roadmap-badge {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 0.75em;
+  padding: 1px 7px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+}
+.docs-roadmap-badge--planned {
+  color: var(--blue);
+  background: rgba(77, 158, 255, 0.08);
+  border-color: rgba(77, 158, 255, 0.2);
+}
+.docs-roadmap-badge--idea {
+  color: var(--text3);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border);
+}
+
+.docs-stack-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.docs-stack-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.73em;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+}
+.docs-stack-item:last-child {
+  border-bottom: none;
+}
+.docs-stack-label {
+  color: var(--text3);
+}
+.docs-stack-val {
+  font-family: var(--mono);
+  color: var(--blue);
+  font-size: 0.9em;
+}
+
+/* Philosophie */
+.docs-tile--philosophy {
+  background: linear-gradient(160deg, #0a0e18 0%, #0c1220 100%);
+  border-color: var(--border2);
+}
+
+.docs-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+.docs-stat {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 12px;
+  text-align: center;
+}
+.docs-stat-num {
+  font-family: var(--mono);
+  font-size: 1.6em;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: -1px;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+.docs-stat-lbl {
+  font-size: 0.65em;
+  color: var(--text3);
+}
+
+/* Footer */
+.docs-footer {
+  text-align: center;
+  padding: 28px 0 8px;
+  border-top: 1px solid var(--border);
+}
+.docs-footer-logo {
+  font-family: var(--sans);
+  font-size: 0.85em;
+  font-weight: 700;
+  color: var(--text2);
+  letter-spacing: -0.2px;
+}
+.docs-footer-sub {
+  font-family: var(--mono);
+  font-size: 0.62em;
+  color: var(--text3);
+  margin-top: 5px;
+}
+
+/* Crimson Theme Anpassungen */
+[data-theme="crimson"] .docs-hero {
+  background: linear-gradient(135deg, #120508 0%, #1a0709 50%, #0e0406 100%);
+}
+[data-theme="crimson"] .docs-tile--accent {
+  background: linear-gradient(
+    135deg,
+    rgba(224, 80, 96, 0.08) 0%,
+    rgba(160, 40, 64, 0.05) 100%
+  );
+  border-color: rgba(224, 80, 96, 0.2);
+}
+[data-theme="crimson"] .docs-tile--accent::before {
+  background: linear-gradient(90deg, var(--blue), var(--blue2));
+}
+[data-theme="crimson"] .docs-tile--claude {
+  border-color: rgba(160, 40, 64, 0.25);
+}
+[data-theme="crimson"] .docs-claude-badge {
+  color: #f87171;
+  background: rgba(160, 40, 64, 0.1);
+  border-color: rgba(160, 40, 64, 0.25);
+}

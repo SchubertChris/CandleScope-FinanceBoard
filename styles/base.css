@@ -1,0 +1,82 @@
+/* ══════════════════════════════════════
+   BASE — Variablen · Reset · Body
+══════════════════════════════════════ */
+:root {
+  --bg: #0c0c0f33;
+  --panel: #00000080;
+  --panel2: #1e2129;
+  --panel3: #494c59;
+  --border: #1e2436;
+  --border2: #252d42;
+  --text: #e8edf8;
+  --text2: #cadbfd;
+  --text3: #9ca1ae;
+  --green: #00e5a0;
+  --green-d: #003d2c;
+  --green-bg: #001a14;
+  --red: #ff4d6a;
+  --red-d: #4a0f1a;
+  --red-bg: #1a0510;
+  --amber: #ffb547;
+  --amber-d: #4a2d00;
+  --amber-bg: #1a1000;
+  --blue: #4d9eff;
+  --blue2: #7b5fff;
+  --blue-bg: #05101e;
+  --teal: #00d4cc;
+  --glow-g: 0 0 20px rgba(0, 229, 160, 0.15);
+  --glow-b: 0 0 20px rgba(77, 158, 255, 0.15);
+  --r: 16px;
+  --r2: 12px;
+  --mono: "DM Mono", monospace;
+  --sans: "Space Grotesk", sans-serif;
+}
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scrollbar-color: var(--border2) transparent;
+  scrollbar-width: thin;
+}
+body {
+  font-family: var(--sans);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: transparent;
+}
+.bg {
+  position: fixed;
+  inset: 0;
+  background-image: url("../images/pexels-joao-vitor-heinrichs-862489-1787044.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: -1;
+  filter: blur(5px);
+}
+/* Crimson theme: roter Farb-Overlay auf Background */
+[data-theme="crimson"] .bg {
+  filter: blur(5px) saturate(1.2) hue-rotate(170deg) brightness(0.7);
+}
+[data-theme="highcontrast"] .bg {
+  filter: blur(5px) grayscale(1) brightness(0.4);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border2);
+  border-radius: 3px;
+}

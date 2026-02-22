@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Build & Dist
+dist/
+build/
+*.o
+*.a
+*.so
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Testing
+.coverage
+htmlcov/
+
+# Package managers
+package-lock.json
+yarn.lock

@@ -1,0 +1,146 @@
+/* ══════════════════════════════════════
+   TABLES — Tabellen · Inline-Edit
+══════════════════════════════════════ */
+.tbl-wrap {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 0.64em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text3);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+thead th.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.12s;
+}
+thead th.sortable:hover {
+  color: var(--text2);
+}
+thead th.sort-asc,
+thead th.sort-desc {
+  color: var(--blue);
+}
+thead th.r {
+  text-align: right;
+}
+.th-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.sort-arr {
+  font-size: 0.8em;
+  opacity: 0.3;
+  transition: opacity 0.12s;
+}
+thead th.sort-asc .sort-arr,
+thead th.sort-desc .sort-arr {
+  opacity: 1;
+}
+
+tbody tr:nth-child(odd) td {
+  background: rgba(255, 255, 255, 0.012);
+}
+tbody tr:hover td {
+  background: rgba(77, 158, 255, 0.05) !important;
+}
+tbody td {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: middle;
+  font-size: 0.82em;
+}
+tbody td.r {
+  text-align: right;
+  font-family: var(--mono);
+}
+tbody td.amt-out {
+  text-align: right;
+  font-family: var(--mono);
+  color: var(--red);
+}
+tbody td.amt-in {
+  text-align: right;
+  font-family: var(--mono);
+  color: var(--green);
+}
+tbody td.amt-trf {
+  text-align: right;
+  font-family: var(--mono);
+  color: var(--teal);
+}
+
+tfoot td {
+  padding: 8px 12px;
+  background: var(--panel2);
+  font-weight: 600;
+  border-top: 1px solid var(--border2);
+  font-size: 0.82em;
+}
+tfoot td.r {
+  text-align: right;
+  font-family: var(--mono);
+}
+
+/* Farbige linke Kante je Typ */
+tbody tr.t-in td:first-child {
+  border-left: 2px solid var(--green);
+}
+tbody tr.t-out td:first-child {
+  border-left: 2px solid var(--border2);
+}
+tbody tr.t-trf td:first-child {
+  border-left: 2px solid var(--teal);
+}
+
+/* ── INLINE EDIT ── */
+.cedit {
+  background: transparent;
+  border: none;
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 1em;
+  color: var(--text);
+  outline: none;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+.cedit:focus {
+  background: var(--panel3);
+  box-shadow: 0 0 0 1px var(--blue);
+}
+.cedit.mono {
+  font-family: var(--mono);
+}
+
+.cedit-sel {
+  background: transparent;
+  border: none;
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 0.82em;
+  color: var(--text2);
+  outline: none;
+  padding: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.cedit-sel:focus {
+  background: var(--panel3);
+}
+.cedit-sel option {
+  background: var(--panel2);
+}
