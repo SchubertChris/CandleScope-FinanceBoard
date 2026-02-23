@@ -141,3 +141,14 @@ electron-builder --linux
 5. Packaging & Testing
 
 > Optional: Später mobile Portierung über React Native / Capacitor
+
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!
+
+FOR RESET 
+
+ rm -rf "$APPDATA/candlescope-financeboard"
+
+!!!!!!!!!!!!!!!!!!!!!!
